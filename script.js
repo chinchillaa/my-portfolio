@@ -173,6 +173,19 @@ window.addEventListener('load', () => {
                     }
                     stat.textContent = Math.floor(currentValue) + '%';
                 }, 30);
+            } else if (target.includes('years+')) {
+                const finalValue = parseInt(target);
+                let currentValue = 0;
+                const increment = finalValue / 50;
+                
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= finalValue) {
+                        currentValue = finalValue;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(currentValue) + 'years+';
+                }, 30);
             } else if (target.includes('+')) {
                 const finalValue = parseInt(target.replace('+', ''));
                 let currentValue = 0;
