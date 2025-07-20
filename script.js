@@ -35,6 +35,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // スクロール時のヘッダーエフェクト
 const header = document.querySelector('.header');
+const heroScroll = document.querySelector('.hero-scroll');
 let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
@@ -44,6 +45,13 @@ window.addEventListener('scroll', () => {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
+    }
+    
+    // hero-scrollを非表示にする
+    if (currentScroll > 200) {
+        heroScroll.classList.add('hidden');
+    } else {
+        heroScroll.classList.remove('hidden');
     }
     
     lastScroll = currentScroll;
@@ -201,7 +209,8 @@ window.addEventListener('scroll', () => {
     const hero = document.querySelector('.hero');
     
     if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        // パララックス効果を弱める（0.5から0.2に変更）
+        hero.style.transform = `translateY(${scrolled * 0.2}px)`;
     }
 });
 

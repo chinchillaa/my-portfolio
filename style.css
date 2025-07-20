@@ -259,6 +259,8 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateX(-50%);
     text-align: center;
     animation: bounce 2s infinite;
+    z-index: 1;
+    transition: opacity 0.3s ease;
 }
 
 .hero-scroll span {
@@ -275,6 +277,11 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 2px solid var(--primary-green);
     transform: rotate(45deg);
     margin: 0 auto;
+}
+
+.hero-scroll.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* セクション共通 */
