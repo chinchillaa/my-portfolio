@@ -115,20 +115,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // お問い合わせフォーム
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
+    // Formspreeのデフォルト動作を使用するため、preventDefault()を削除
+    // 送信成功後の処理のみ残す
     contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            message: document.getElementById('message').value
-        };
-        
-        // ここで実際のメール送信処理を実装
-        alert(`お問い合わせありがとうございます、${formData.name}様。\n\nメッセージを受け取りました。\n返信まで少々お待ちください。`);
-        
-        // フォームをリセット
-        this.reset();
+        // Formspreeにフォームを送信（デフォルト動作）
+        // 送信ボタンを無効化して二重送信を防ぐ
+        const submitButton = this.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = '送信中...';
     });
 }
 
