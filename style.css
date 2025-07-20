@@ -260,7 +260,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     animation: bounce 2s infinite;
     z-index: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .hero-scroll span {
@@ -282,6 +282,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-scroll.hidden {
     opacity: 0;
     pointer-events: none;
+    transform: translateX(-50%) translateY(20px);
 }
 
 /* セクション共通 */

@@ -47,8 +47,8 @@ window.addEventListener('scroll', () => {
         header.classList.remove('scrolled');
     }
     
-    // hero-scrollを非表示にする
-    if (currentScroll > 200) {
+    // hero-scrollを非表示にする（少しでもスクロールしたら非表示）
+    if (currentScroll > 50) {
         heroScroll.classList.add('hidden');
     } else {
         heroScroll.classList.remove('hidden');
