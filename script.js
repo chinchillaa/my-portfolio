@@ -1,10 +1,27 @@
-// スムーススクロール機能
+// ハンバーガーメニュー
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+});
+
+// ナビゲーションリンクをクリックしたときにメニューを閉じる
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+    });
+});
+
+// スムーススクロール
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const headerOffset = 60;
+            const headerOffset = 80;
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -16,70 +33,98 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// お問い合わせフォームの処理
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // フォームデータを取得
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        message: document.getElementById('message').value
-    };
-    
-    // ここで実際のメール送信処理を実装できます
-    // 現在は単純にアラートを表示
-    alert(`お問い合わせありがとうございます、${formData.name}様。\n\nメッセージを受け取りました。\n返信まで少々お待ちください。`);
-    
-    // フォームをリセット
-    this.reset();
-});
-
-// スクロールに応じてヘッダーの背景を変更
+// スクロール時のヘッダーエフェクト
+const header = document.querySelector('.header');
 let lastScroll = 0;
+
 window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
     const currentScroll = window.pageYOffset;
     
-    if (currentScroll > 100) {
-        header.style.backgroundColor = 'rgba(51, 51, 51, 0.95)';
-        header.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+    if (currentScroll > 50) {
+        header.classList.add('scrolled');
     } else {
-        header.style.backgroundColor = '#333';
-        header.style.boxShadow = 'none';
+        header.classList.remove('scrolled');
     }
     
     lastScroll = currentScroll;
 });
 
-// アニメーション効果（要素が画面に入ったらフェードイン）
+// 要素のフェードインアニメーション
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -100px 0px'
 };
 
-const observer = new IntersectionObserver(function(entries) {
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('visible');
+            // アニメーションを一度だけ実行
+            if (entry.target.classList.contains('once')) {
+                observer.unobserve(entry.target);
+            }
         }
     });
 }, observerOptions);
 
-// 監視する要素を設定
+// フェードインアニメーションを適用する要素
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.skill-item, .timeline-item, .portfolio-item');
+    // セクションタイトル
+    document.querySelectorAll('.section-title').forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
     
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    // スキルカテゴリー
+    document.querySelectorAll('.skill-category').forEach((el, index) => {
+        el.classList.add('fade-in');
+        el.style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(el);
+    });
+    
+    // タイムラインアイテム
+    document.querySelectorAll('.timeline-item').forEach((el, index) => {
+        el.classList.add('fade-in');
+        el.style.transitionDelay = `${index * 0.2}s`;
+        observer.observe(el);
+    });
+    
+    // ポートフォリオアイテム
+    document.querySelectorAll('.portfolio-item').forEach((el, index) => {
+        el.classList.add('fade-in');
+        el.style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(el);
+    });
+    
+    // 統計
+    document.querySelectorAll('.stat-item').forEach((el, index) => {
+        el.classList.add('fade-in');
+        el.style.transitionDelay = `${index * 0.1}s`;
         observer.observe(el);
     });
 });
 
-// タイピングエフェクト（オプション）
+// お問い合わせフォーム
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            message: document.getElementById('message').value
+        };
+        
+        // ここで実際のメール送信処理を実装
+        alert(`お問い合わせありがとうございます、${formData.name}様。\n\nメッセージを受け取りました。\n返信まで少々お待ちください。`);
+        
+        // フォームをリセット
+        this.reset();
+    });
+}
+
+// タイピングアニメーション
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.textContent = '';
@@ -95,11 +140,86 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
-// ページ読み込み時にヒーローセクションのテキストにタイピングエフェクトを適用
+// ページ読み込み時のアニメーション
 window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('#hero h1');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        typeWriter(heroTitle, originalText, 80);
+    // タイトルのタイピングアニメーションは削除（モダンなフェードインを維持）
+    
+    // 数値のカウントアップアニメーション
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    statNumbers.forEach(stat => {
+        const updateCount = () => {
+            const target = stat.textContent;
+            
+            // 数値の場合のみカウントアップ
+            if (target.includes('%')) {
+                const finalValue = parseInt(target);
+                let currentValue = 0;
+                const increment = finalValue / 50;
+                
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= finalValue) {
+                        currentValue = finalValue;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(currentValue) + '%';
+                }, 30);
+            } else if (target.includes('+')) {
+                const finalValue = parseInt(target.replace('+', ''));
+                let currentValue = 0;
+                const increment = finalValue / 50;
+                
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= finalValue) {
+                        currentValue = finalValue;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(currentValue) + '+';
+                }, 30);
+            }
+        };
+        
+        // 要素が表示されたときにカウントアップを開始
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCount();
+                    countObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        countObserver.observe(stat);
+    });
+});
+
+// パララックス効果（ヒーロー部分）
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    
+    if (hero && scrolled < window.innerHeight) {
+        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
     }
+});
+
+// スキルタグのホバーエフェクト
+document.querySelectorAll('.skill-tag').forEach(tag => {
+    tag.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.05)';
+    });
+    
+    tag.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+    });
+});
+
+// ポートフォリオアイテムの詳細表示（将来的な実装用）
+document.querySelectorAll('.portfolio-item').forEach(item => {
+    item.addEventListener('click', function() {
+        // 将来的にモーダルやページ遷移を実装
+        console.log('Portfolio item clicked:', this.querySelector('h3').textContent);
+    });
 });
