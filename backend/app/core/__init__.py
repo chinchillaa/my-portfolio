@@ -6,6 +6,7 @@ from .exceptions import (
     AuthenticationException
 )
 from .security import SecurityService
+from .auth import api_key_auth, require_api_key
 
 __all__ = [
     "ChatbotException",
@@ -13,5 +14,7 @@ __all__ = [
     "GeminiAPIException",
     "ValidationException",
     "AuthenticationException",
-    "SecurityService"
+    "SecurityService",
+    "api_key_auth",
+    "require_api_key"
 ]

@@ -4,6 +4,7 @@ import logging
 from app.models import ChatRequest, ChatResponse, ErrorResponse
 from app.services import GeminiService, RateLimiter
 from app.core import SecurityService, ValidationException, RateLimitException
+from app.core.auth import require_api_key
 from app.api.v1.dependencies import get_client_ip, validate_csrf_token
 
 logger = logging.getLogger(__name__)
@@ -17,9 +18,11 @@ security_service = SecurityService()
 
 @router.post("", response_model=ChatResponse, responses={
     400: {"model": ErrorResponse, "description": "Bad Request"},
+    401: {"model": ErrorResponse, "description": "Unauthorized"},
+    403: {"model": ErrorResponse, "description": "Forbidden"},
     429: {"model": ErrorResponse, "description": "Rate Limit Exceeded"},
     503: {"model": ErrorResponse, "description": "Service Unavailable"}
-})
+}, dependencies=[Depends(require_api_key)])
 async def chat(
     request: Request,
     chat_request: ChatRequest,
@@ -80,7 +83,7 @@ async def chat(
         raise
 
 
-@router.get("/quota")
+@router.get("/quota", dependencies=[Depends(require_api_key)])
 async def get_quota(
     request: Request,
     client_ip: str = Depends(get_client_ip)

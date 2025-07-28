@@ -2,11 +2,13 @@
 class PortfolioChatbot {
     constructor() {
         this.apiUrl = 'https://my-portfolio-production-5ffa.up.railway.app/api/v1';
+        this.apiKey = null; // APIキーは初期化時に設定
         this.sessionId = this.getOrCreateSessionId();
         this.messages = [];
         this.isTyping = false;
         this.initializeElements();
         this.attachEventListeners();
+        this.loadApiKey();
     }
 
     // セッションIDの取得または作成
@@ -181,12 +183,35 @@ class PortfolioChatbot {
         }
     }
 
+    // APIキーの読み込み
+    async loadApiKey() {
+        try {
+            // publicディレクトリのconfig.jsonからAPIキーを読み込む
+            const response = await fetch('/config.json');
+            if (response.ok) {
+                const config = await response.json();
+                this.apiKey = config.apiKey;
+            } else {
+                console.error('Failed to load API key configuration');
+                this.showError('チャットボットの初期化に失敗しました。');
+            }
+        } catch (error) {
+            console.error('Error loading API key:', error);
+            this.showError('チャットボットの初期化に失敗しました。');
+        }
+    }
+
     // Chat APIの呼び出し
     async callChatAPI(message) {
+        if (!this.apiKey) {
+            throw new Error('APIキーが設定されていません。');
+        }
+
         const response = await fetch(`${this.apiUrl}/chat`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-API-Key': this.apiKey,
                 'X-Session-ID': this.sessionId,
                 'X-Requested-With': 'XMLHttpRequest'
             },
@@ -198,6 +223,12 @@ class PortfolioChatbot {
         });
 
         if (!response.ok) {
+            if (response.status === 401) {
+                throw new Error('認証エラー：APIキーが無効です。');
+            }
+            if (response.status === 403) {
+                throw new Error('アクセスが拒否されました。');
+            }
             if (response.status === 429) {
                 throw new Error('リクエスト制限に達しました。しばらく待ってから再度お試しください。');
             }

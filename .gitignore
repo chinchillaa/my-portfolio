@@ -32,6 +32,9 @@ node_modules/
 .env
 .env.local
 
+# API configuration
+config.json
+
 # Temporary files
 *.tmp
 *.temp

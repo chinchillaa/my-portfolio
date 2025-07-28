@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     
     # セキュリティ設定
     SECRET_KEY: str
+    API_KEY: str  # APIキー認証用
     ALLOWED_ORIGINS: Union[str, List[str]] = Field(default="https://chinchillaa.github.io")
     
     # レート制限
