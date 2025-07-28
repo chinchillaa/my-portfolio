@@ -50,11 +50,17 @@ async def chat(
         # セッションIDの生成または検証
         session_id = x_session_id or security_service.generate_session_id()
         
+        # 受信メッセージをログに記録
+        logger.info(f"[Chat Request] Session: {session_id[:8]}..., Message: {sanitized_message}")
+        
         # Gemini APIで応答を生成
         response_text = await gemini_service.generate_response(
             message=sanitized_message,
             context=chat_request.context
         )
+        
+        # 応答メッセージをログに記録
+        logger.info(f"[Chat Response] Session: {session_id[:8]}..., Response: {response_text[:100]}...")
         
         # レスポンスの作成
         return ChatResponse(
@@ -64,7 +70,7 @@ async def chat(
         )
         
     except RateLimitException as e:
-        logger.warning(f"Rate limit exceeded for IP: {hashed_ip}")
+        logger.warning(f"Rate limit exceeded for IP: {hashed_ip}, Session: {x_session_id}")
         raise e
     except ValidationException as e:
         logger.warning(f"Validation error: {str(e)}")
