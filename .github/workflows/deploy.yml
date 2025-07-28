@@ -28,9 +28,33 @@ jobs:
         env:
           API_KEY: ${{ secrets.CHATBOT_API_KEY }}
         run: |
+          echo "Creating config.json with API key..."
           echo '{' > config.json
           echo '  "apiKey": "'$API_KEY'"' >> config.json
           echo '}' >> config.json
+          
+      - name: Verify config.json
+        run: |
+          echo "Checking if config.json exists..."
+          if [ -f config.json ]; then
+            echo "✅ config.json exists"
+            echo "File contents:"
+            cat config.json
+            echo ""
+            echo "File size:"
+            ls -la config.json
+          else
+            echo "❌ config.json not found!"
+            exit 1
+          fi
+          
+      - name: List all files to be deployed
+        run: |
+          echo "Files in root directory:"
+          ls -la
+          echo ""
+          echo "All files that will be deployed:"
+          find . -type f -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.json" | head -20
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
