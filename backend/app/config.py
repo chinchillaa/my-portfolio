@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     
     # Gemini API設定
     GEMINI_API_KEY: str
-    GEMINI_MODEL: str = "gemini-pro"
+    GEMINI_MODEL: str = "gemini-2.5-flash-lite"
     
     # Redis設定
     REDIS_URL: str = "redis://localhost:6379"
