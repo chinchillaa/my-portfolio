@@ -28,8 +28,8 @@ USER chatbot
 HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
   CMD python -c "import requests; requests.get('http://localhost:8000/health')"
 
-# ポートの公開
+# ポートの公開（デフォルト8000、環境変数で上書き可能）
 EXPOSE 8000
 
-# アプリケーションの起動
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# アプリケーションの起動（PORT環境変数を使用）
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}

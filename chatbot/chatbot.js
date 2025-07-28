@@ -1,7 +1,7 @@
 // チャットボットのメインロジック
 class PortfolioChatbot {
     constructor() {
-        this.apiUrl = 'https://your-backend.railway.app/api/v1'; // Railway URL に置き換え
+        this.apiUrl = 'https://my-portfolio-production-5ffa.up.railway.app/api/v1';
         this.sessionId = this.getOrCreateSessionId();
         this.messages = [];
         this.isTyping = false;
