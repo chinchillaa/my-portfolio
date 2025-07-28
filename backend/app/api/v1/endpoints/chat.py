@@ -3,7 +3,8 @@ from typing import Optional
 import logging
 from app.models import ChatRequest, ChatResponse, ErrorResponse
 from app.services import GeminiService, RateLimiter
-from app.core import SecurityService, ValidationException, RateLimitException
+from app.core import ValidationException, RateLimitException
+from app.core.security import SecurityService
 from app.core.auth import require_api_key
 from app.api.v1.dependencies import get_client_ip, validate_csrf_token
 
@@ -13,7 +14,6 @@ router = APIRouter()
 # サービスのインスタンス化
 gemini_service = GeminiService()
 rate_limiter = RateLimiter()
-security_service = SecurityService()
 
 
 @router.post("", response_model=ChatResponse, responses={
@@ -36,8 +36,8 @@ async def chat(
     ユーザーのメッセージに対してAIアシスタントが応答します。
     """
     try:
-        # 入力のサニタイズ
-        sanitized_message = security_service.sanitize_input(chat_request.message)
+        # 入力のサニタイズ（XSS対策）
+        sanitized_message = SecurityService.sanitize_input(chat_request.message, allow_html=False)
         
         # コンテンツの安全性チェック
         safety_check = await gemini_service.check_content_safety(sanitized_message)
@@ -45,13 +45,13 @@ async def chat(
             raise ValidationException("Unsafe content detected")
         
         # IPアドレスのハッシュ化（プライバシー保護）
-        hashed_ip = security_service.hash_ip(client_ip)
+        hashed_ip = SecurityService.hash_ip(client_ip)
         
         # レート制限チェック
         await rate_limiter.check_rate_limit(hashed_ip)
         
         # セッションIDの生成または検証
-        session_id = x_session_id or security_service.generate_session_id()
+        session_id = x_session_id or SecurityService.generate_session_id()
         
         # 受信メッセージをログに記録
         logger.info(f"[Chat Request] Session: {session_id[:8]}..., Message: {sanitized_message}")
@@ -65,9 +65,13 @@ async def chat(
         # 応答メッセージをログに記録
         logger.info(f"[Chat Response] Session: {session_id[:8]}..., Response: {response_text[:100]}...")
         
+        # レスポンスのサニタイズとデータ返却
+        # Markdownとして処理し、安全なHTMLに変換
+        sanitized_response = SecurityService.sanitize_markdown(response_text)
+        
         # レスポンスの作成
         return ChatResponse(
-            message=response_text,
+            message=sanitized_response,
             session_id=session_id,
             status="success"
         )
@@ -93,7 +97,7 @@ async def get_quota(
     
     現在のIPアドレスに対する残りリクエスト数を返します。
     """
-    hashed_ip = security_service.hash_ip(client_ip)
+    hashed_ip = SecurityService.hash_ip(client_ip)
     quota = await rate_limiter.get_remaining_quota(hashed_ip)
     
     return {
