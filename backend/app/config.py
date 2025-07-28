@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     
     # セキュリティ設定
     SECRET_KEY: str
-    ALLOWED_ORIGINS: List[str] = []
+    ALLOWED_ORIGINS: List[str] = ["https://chinchillaa.github.io"]
     
     # レート制限
     RATE_LIMIT_PER_MINUTE: int = 10
@@ -31,8 +31,13 @@ class Settings(BaseSettings):
     
     @field_validator("ALLOWED_ORIGINS", mode='before')
     def parse_allowed_origins(cls, v):
+        if v is None:
+            return []
         if isinstance(v, str):
-            return [origin.strip() for origin in v.split(',')]
+            # 空文字列の場合は空リストを返す
+            if not v.strip():
+                return []
+            return [origin.strip() for origin in v.split(',') if origin.strip()]
         return v
     
     class Config:
