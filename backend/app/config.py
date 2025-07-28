@@ -1,7 +1,8 @@
 import os
-from typing import List
+from typing import List, Union
 from pydantic_settings import BaseSettings
-from pydantic import field_validator
+from pydantic import field_validator, Field
+import json
 
 
 class Settings(BaseSettings):
@@ -19,7 +20,7 @@ class Settings(BaseSettings):
     
     # セキュリティ設定
     SECRET_KEY: str
-    ALLOWED_ORIGINS: List[str] = ["https://chinchillaa.github.io"]
+    ALLOWED_ORIGINS: Union[str, List[str]] = Field(default="https://chinchillaa.github.io")
     
     # レート制限
     RATE_LIMIT_PER_MINUTE: int = 10
@@ -32,17 +33,28 @@ class Settings(BaseSettings):
     @field_validator("ALLOWED_ORIGINS", mode='before')
     def parse_allowed_origins(cls, v):
         if v is None:
-            return []
+            return ["https://chinchillaa.github.io"]
         if isinstance(v, str):
-            # 空文字列の場合は空リストを返す
+            # 空文字列の場合はデフォルト値を返す
             if not v.strip():
-                return []
+                return ["https://chinchillaa.github.io"]
+            # JSON配列かどうか確認
+            if v.strip().startswith('['):
+                try:
+                    return json.loads(v)
+                except json.JSONDecodeError:
+                    pass
+            # カンマ区切りの文字列として処理
             return [origin.strip() for origin in v.split(',') if origin.strip()]
-        return v
+        if isinstance(v, list):
+            return v
+        return ["https://chinchillaa.github.io"]
     
     class Config:
         env_file = ".env"
         case_sensitive = True
+        # 自動的なJSON解析を無効化
+        json_parse_mode = None
 
 
 settings = Settings()

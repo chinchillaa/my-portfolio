@@ -40,9 +40,14 @@ app = FastAPI(
 setup_middleware(app)
 
 # CORS設定
+# ALLOWED_ORIGINSが確実にリストであることを保証
+allowed_origins = settings.ALLOWED_ORIGINS
+if isinstance(allowed_origins, str):
+    allowed_origins = [allowed_origins]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
