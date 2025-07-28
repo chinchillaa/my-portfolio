@@ -1,6 +1,8 @@
 import google.generativeai as genai
 from typing import List, Optional, Dict, Any
 import logging
+import os
+from pathlib import Path
 from app.config import settings
 from app.core.exceptions import GeminiAPIException
 from app.models import ChatMessage
@@ -40,27 +42,30 @@ class GeminiService:
             }
         ]
         
-        # システムプロンプト（ポートフォリオ用にカスタマイズ）
-        self.system_prompt = """あなたは津川聡のポートフォリオサイトのAIアシスタントです。
-        
-私（津川聡）について：
-- データサイエンティスト & AI導入支援の専門家
-- 現在はIT企業でAIエージェント等の最新技術を実際のビジネス現場に活用
-- LLMのファインチューニングから実装まで一貫した開発経験
-- Kaggle Expertとして活動（silver×1, bronze×2）
-
-スキル：
-- LLM開発（Llama等のOSS LLMのLoRAファインチューニング）
-- AIエージェント（Claude Code、Gemini CLI、MCPなど）
-- データサイエンス全般
-- ビジネスコンサルティング
-
-あなたの役割：
-1. 訪問者の質問に丁寧に答える
-2. 私のスキルや経験について適切に説明する
-3. 技術的な質問にも対応する
-4. 日本語で自然な会話を行う
-5. プロフェッショナルでフレンドリーな対応を心がける"""
+        # システムプロンプトをファイルから読み込む
+        self.system_prompt = self._load_system_prompt()
+    
+    def _load_system_prompt(self) -> str:
+        """システムプロンプトをファイルから読み込む"""
+        try:
+            # プロンプトファイルのパスを構築
+            base_dir = Path(__file__).resolve().parent.parent
+            prompt_file = base_dir / "prompts" / "system_prompt.txt"
+            
+            # ファイルが存在しない場合のデフォルトプロンプト
+            if not prompt_file.exists():
+                logger.warning(f"System prompt file not found at {prompt_file}")
+                return "あなたは親切なAIアシスタントです。"
+            
+            # ファイルから読み込み
+            with open(prompt_file, "r", encoding="utf-8") as f:
+                prompt = f.read().strip()
+                logger.info("System prompt loaded successfully")
+                return prompt
+                
+        except Exception as e:
+            logger.error(f"Error loading system prompt: {str(e)}")
+            return "あなたは親切なAIアシスタントです。"
     
     async def generate_response(
         self,
