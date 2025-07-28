@@ -66,8 +66,8 @@ async def chat(
         logger.info(f"[Chat Response] Session: {session_id[:8]}..., Response: {response_text[:100]}...")
         
         # レスポンスのサニタイズとデータ返却
-        # Markdownとして処理し、安全なHTMLに変換
-        sanitized_response = SecurityService.sanitize_markdown(response_text)
+        # プレーンテキストとしてサニタイズ（HTMLタグをエスケープ）
+        sanitized_response = SecurityService.sanitize_input(response_text, allow_html=False)
         
         # レスポンスの作成
         return ChatResponse(
