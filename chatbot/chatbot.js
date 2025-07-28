@@ -186,8 +186,8 @@ class PortfolioChatbot {
     // APIキーの読み込み
     async loadApiKey() {
         try {
-            // publicディレクトリのconfig.jsonからAPIキーを読み込む
-            const response = await fetch('/config.json');
+            // config.jsonからAPIキーを読み込む（相対パス）
+            const response = await fetch('./config.json');
             if (response.ok) {
                 const config = await response.json();
                 this.apiKey = config.apiKey;
