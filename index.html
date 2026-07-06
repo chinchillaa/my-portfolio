@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>津川 聡 - データサイエンティスト / AI活用推進</title>
+    <meta name="description" content="津川聡のポートフォリオ。Snowflake DWH構築、AIエージェント開発、データサイエンスの実績をご紹介します。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Roboto+Slab:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/images/favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/images/favicon-512.png">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWYE1RD2HG"></script>
     <script>
@@ -21,270 +26,340 @@
 </head>
 <body>
     <header class="header">
-        <nav class="nav">
-            <div class="nav-container">
-                <a href="#" class="logo">Satoru Tsugawa</a>
-                <ul class="nav-menu">
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#skills" class="nav-link">Skills</a></li>
-                    <li><a href="#experience" class="nav-link">Experience</a></li>
-                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
+        <nav class="nav" aria-label="メインナビゲーション">
+            <a href="#hero" class="logo">
+                <span class="logo-mark">津</span>
+                <span class="logo-text">Satoru Tsugawa</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link"><span class="nav-num">01</span>About</a></li>
+                <li><a href="#skills" class="nav-link"><span class="nav-num">02</span>Skills</a></li>
+                <li><a href="#experience" class="nav-link"><span class="nav-num">03</span>Career</a></li>
+                <li><a href="#works" class="nav-link"><span class="nav-num">04</span>Works</a></li>
+                <li><a href="#contact" class="nav-link nav-link-cta"><span class="nav-num">05</span>Contact</a></li>
+            </ul>
+            <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
     <main>
+        <!-- ヒーロー -->
         <section id="hero" class="hero">
-            <div class="hero-content">
+            <div class="hero-grid-bg" aria-hidden="true"></div>
+            <div class="hero-inner">
+                <p class="hero-eyebrow reveal-load" style="--d: 0">
+                    <span class="mono">PORTFOLIO</span>
+                    <span class="hero-eyebrow-rule"></span>
+                    <span class="mono">DATA SCIENCE / AI / DWH</span>
+                </p>
                 <h1 class="hero-title">
-                    <span class="title-main">津川 聡</span>
-                    <span class="title-sub">Satoru Tsugawa</span>
+                    <span class="hero-line reveal-load" style="--d: 1">データを、</span>
+                    <span class="hero-line reveal-load" style="--d: 2">意思決定の<em>言語</em>に。</span>
                 </h1>
-                <p class="hero-description">データサイエンティスト / AI活用推進 / DWH・BI構築</p>
-                <p class="hero-tagline">Snowflake | AI Agent | Data Science</p>
-                <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#portfolio" class="btn btn-secondary">View Works</a>
+                <div class="hero-name reveal-load" style="--d: 3">
+                    <span class="hero-name-ja">津川 聡</span>
+                    <span class="hero-name-en mono">Satoru Tsugawa — Data Scientist</span>
                 </div>
+                <p class="hero-lead reveal-load" style="--d: 4">
+                    Snowflakeによる全社データ基盤の構築から、生成AIエージェントの実装、
+                    KPI改善のためのデータ分析まで。<br>
+                    「データに価値を灯す」ことを仕事にしています。
+                </p>
+                <div class="hero-cta reveal-load" style="--d: 5">
+                    <a href="#works" class="btn btn-fill">実績を見る</a>
+                    <a href="#contact" class="btn btn-line">相談する</a>
+                </div>
+                <ul class="hero-index mono reveal-load" style="--d: 6">
+                    <li><span>Kaggle</span><span class="dots"></span><span>Expert</span></li>
+                    <li><span>AI / ML 経験</span><span class="dots"></span><span>7年以上</span></li>
+                    <li><span>現職</span><span class="dots"></span><span>SB C&amp;S 株式会社</span></li>
+                </ul>
             </div>
-            <div class="hero-scroll">
-                <span>Scroll</span>
-                <div class="scroll-arrow"></div>
+            <div class="hero-vertical" aria-hidden="true">
+                <span>データサイエンティスト・津川聡</span>
+            </div>
+            <div class="hero-scroll" aria-hidden="true">
+                <span class="mono">SCROLL</span>
             </div>
         </section>
 
-        <section id="about" class="about section">
+        <!-- About -->
+        <section id="about" class="section">
             <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
+                <div class="section-head reveal">
+                    <span class="section-num mono">01</span>
+                    <h2 class="section-title">About<span class="section-title-ja">わたしについて</span></h2>
+                </div>
+                <div class="about-grid">
                     <div class="about-text">
-                        <p class="lead">
+                        <p class="lead reveal">
+                            メーカー・コンサルティング・IT商社の三つの現場で、
+                            データとAIを「実務の成果」につなげてきました。
+                        </p>
+                        <p class="reveal">
                             現在はSB C&amp;S株式会社にて、Snowflakeを使った全社共通DWHの導入と、
                             AI活用・データ分析による社内KPI改善をミッションとするデータサイエンティストとして従事しています。
-                        </p>
-                        <p>
-                            Cortex Agentを用いたサポート業務AX化、Copilot Studio等のMicrosoft AIプラットフォーム活用セミナー、
+                            Cortex Agentを用いたサポート業務のAX化、Copilot StudioなどMicrosoft AIプラットフォーム活用セミナーの講師、
                             Power BIによる売上ヘルスチェックダッシュボード構築など、AI・DWH・BIを実務課題に接続する取り組みを推進しています。
                         </p>
-                        <p>
+                        <p class="reveal">
                             本田技研工業での設計PL・データ分析、アクセンチュアでのPMI PMO・OSS LLM開発を経て、
-                            Kaggle Expertとしても統計・機械学習・自然言語処理・画像処理の実装力を継続的に高めています。
+                            Kaggle Expertとして統計・機械学習・自然言語処理・画像処理の実装力も継続的に磨いています。
                         </p>
                     </div>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">7years+</span>
-                            <span class="stat-label">AI/ML プロジェクト</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">Expert</span>
-                            <span class="stat-label">Kaggle Rank</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">Snowflake</span>
-                            <span class="stat-label">DWH / BI / AI</span>
-                        </div>
+                    <div class="about-side">
+                        <!-- 写真: StockSnap.io (CC0 / 帰属表示不要) -->
+                        <figure class="about-photo reveal">
+                            <img src="assets/images/about-desk.jpg"
+                                 alt="ワイヤーフレームのスケッチにペンを走らせる手元"
+                                 width="960" height="640" loading="lazy">
+                            <!-- <figcaption class="mono">— 毎日手を動かして、考える。</figcaption> -->
+                        </figure>
+                        <dl class="about-facts reveal">
+                            <div class="fact">
+                                <dt class="mono">AI / ML プロジェクト</dt>
+                                <dd>7<span class="fact-unit">年以上</span></dd>
+                            </div>
+                            <div class="fact">
+                                <dt class="mono">Kaggle</dt>
+                                <dd>Expert</dd>
+                            </div>
+                            <div class="fact">
+                                <dt class="mono">専門領域</dt>
+                                <dd>DWH / BI / AI</dd>
+                            </div>
+                        </dl>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="skills section">
+        <!-- Skills -->
+        <section id="skills" class="section section-alt">
             <div class="container">
-                <h2 class="section-title">Skills</h2>
+                <div class="section-head reveal">
+                    <span class="section-num mono">02</span>
+                    <h2 class="section-title">Skills<span class="section-title-ja">できること</span></h2>
+                </div>
                 <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3 class="skill-title">データサイエンス・AI</h3>
-                        <div class="skill-items">
-                            <span class="skill-tag">LLM開発</span>
-                            <span class="skill-tag">LoRA SFT</span>
-                            <span class="skill-tag">AIエージェント実装</span>
-                            <span class="skill-tag">Snowflake Cortex</span>
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">PyTorch</span>
-                            <span class="skill-tag">HuggingFace</span>
-                            <span class="skill-tag">機械学習</span>
-                            <span class="skill-tag">深層学習</span>
-                            <span class="skill-tag">Kaggle</span>
-                        </div>
+                    <div class="skill-col reveal">
+                        <h3 class="skill-head"><span class="mono skill-idx">A.</span>データサイエンス・AI</h3>
+                        <ul class="skill-list">
+                            <li>LLM開発 / LoRA SFT</li>
+                            <li>AIエージェント実装</li>
+                            <li>Snowflake Cortex</li>
+                            <li>Python / PyTorch / HuggingFace</li>
+                            <li>機械学習・深層学習</li>
+                            <li>Kaggle（時系列・画像・NLP）</li>
+                        </ul>
                     </div>
-                    <div class="skill-category">
-                        <h3 class="skill-title">ビジネススキル</h3>
-                        <div class="skill-items">
-                            <span class="skill-tag">AI導入コンサルティング</span>
-                            <span class="skill-tag">DWH要件定義</span>
-                            <span class="skill-tag">ハンズオン講師</span>
-                            <span class="skill-tag">PMO</span>
-                            <span class="skill-tag">KPI分析</span>
-                            <span class="skill-tag">BI可視化</span>
-                            <span class="skill-tag">プレゼンテーション</span>
-                        </div>
+                    <div class="skill-col reveal">
+                        <h3 class="skill-head"><span class="mono skill-idx">B.</span>ビジネス</h3>
+                        <ul class="skill-list">
+                            <li>AI導入コンサルティング</li>
+                            <li>DWH要件定義</li>
+                            <li>セミナー・ハンズオン講師</li>
+                            <li>PMO / プロジェクト推進</li>
+                            <li>KPI分析・BI可視化</li>
+                            <li>プレゼンテーション</li>
+                        </ul>
                     </div>
-                    <div class="skill-category">
-                        <h3 class="skill-title">インフラ・ツール</h3>
-                        <div class="skill-items">
-                            <span class="skill-tag">Snowflake</span>
-                            <span class="skill-tag">dbt</span>
-                            <span class="skill-tag">Power BI</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">Excel</span>
-                            <span class="skill-tag">VBA</span>
-                            <span class="skill-tag">GCP</span>
-                            <span class="skill-tag">Linux</span>
-                            <span class="skill-tag">RAPIDS cuDF</span>
-                        </div>
+                    <div class="skill-col reveal">
+                        <h3 class="skill-head"><span class="mono skill-idx">C.</span>インフラ・ツール</h3>
+                        <ul class="skill-list">
+                            <li>Snowflake / dbt</li>
+                            <li>Power BI</li>
+                            <li>SQL / Excel / VBA</li>
+                            <li>Docker / Linux / GCP</li>
+                            <li>RAPIDS cuDF</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="experience section">
+        <!-- Experience -->
+        <section id="experience" class="section">
             <div class="container">
-                <h2 class="section-title">Experience</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">2024.07 - 現在</div>
-                        <div class="timeline-content">
-                            <h3>SB C&amp;S株式会社</h3>
-                            <h4>データサイエンティスト / AI活用推進 / DWH・BI構築</h4>
-                            <p>
-                                Snowflakeを用いた全社共通DWH導入、Cortex Agentを用いたサポート業務AX化、
-                                Copilot Studio等のセミナー講師、Power BIによる売上ヘルスチェックダッシュボード構築を担当。
+                <div class="section-head reveal">
+                    <span class="section-num mono">03</span>
+                    <h2 class="section-title">Career<span class="section-title-ja">これまでの歩み</span></h2>
+                </div>
+                <ol class="career">
+                    <li class="career-item reveal">
+                        <div class="career-period mono">
+                            <span class="career-year">2024.07</span>
+                            <span class="career-arrow">→ 現在</span>
+                        </div>
+                        <div class="career-body">
+                            <h3 class="career-company">SB C&amp;S株式会社</h3>
+                            <p class="career-role">データサイエンティスト / AI活用推進 / DWH・BI構築</p>
+                            <p class="career-desc">
+                                Snowflakeを用いた全社共通DWH導入、Cortex Agentによるサポート業務のAX化、
+                                Copilot Studioなどのセミナー講師、Power BIによる売上ヘルスチェックダッシュボード構築を担当。
                             </p>
                         </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2023.01 - 2024.07</div>
-                        <div class="timeline-content">
-                            <h3>アクセンチュア株式会社</h3>
-                            <h4>官公庁向けOSS LLM開発 / PMI PMO</h4>
-                            <p>
-                                Llama2、ELYZA等をベースにLoRAによるSFT、推論評価、学習データのクリーニング、EDAを担当。
+                    </li>
+                    <li class="career-item reveal">
+                        <div class="career-period mono">
+                            <span class="career-year">2023.01</span>
+                            <span class="career-arrow">→ 2024.07</span>
+                        </div>
+                        <div class="career-body">
+                            <h3 class="career-company">アクセンチュア株式会社</h3>
+                            <p class="career-role">官公庁向けOSS LLM開発 / PMI PMO</p>
+                            <p class="career-desc">
+                                Llama2やELYZAをベースにLoRAによるSFT、推論評価、学習データのクリーニング、EDAを担当。
                                 効率化システム全体としてレビュー工数53%削減に寄与。PMI PMOではWBS管理とレポーティングを担当。
                             </p>
                         </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2019.04 - 2022.12</div>
-                        <div class="timeline-content">
-                            <h3>本田技研工業株式会社</h3>
-                            <h4>データ分析 / 業務改善 / 二輪部品の電装設計PL</h4>
-                            <p>
+                    </li>
+                    <li class="career-item reveal">
+                        <div class="career-period mono">
+                            <span class="career-year">2019.04</span>
+                            <span class="career-arrow">→ 2022.12</span>
+                        </div>
+                        <div class="career-body">
+                            <h3 class="career-company">本田技研工業株式会社</h3>
+                            <p class="career-role">データ分析 / 業務改善 / 二輪部品の電装設計PL</p>
+                            <p class="career-desc">
                                 BERTを活用した改善提案データの類似・パターン分析、提案集積システムの保守・仕様検討、
                                 課員80名の工数実績可視化を担当。新卒入社後は東南アジア向けコミューター電装設計PLを担当。
                             </p>
                         </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Works -->
+        <section id="works" class="section section-alt">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="section-num mono">04</span>
+                    <h2 class="section-title">Works<span class="section-title-ja">主な実績</span></h2>
+                </div>
+                <ol class="works">
+                    <li class="work reveal">
+                        <span class="work-num mono">01</span>
+                        <div class="work-main">
+                            <h3 class="work-title">Cortex Agentによるサポート業務のAX化</h3>
+                            <p class="work-desc">
+                                Snowflake Cortex Agentを活用し、製品仕様書・FAQ・過去の問い合わせ履歴を参照した回答支援を検証。
+                                一次回答案の自動生成と運用課題の整理を推進。
+                            </p>
+                            <p class="work-tags mono">Snowflake / Cortex Agent / Cortex Search / AI Agent</p>
+                        </div>
+                    </li>
+                    <li class="work reveal">
+                        <span class="work-num mono">02</span>
+                        <div class="work-main">
+                            <h3 class="work-title">Snowflake全社共通DWHの導入</h3>
+                            <p class="work-desc">
+                                基幹システム・Salesforce・Microsoft 365などのデータをSnowflakeへ統合。
+                                データ基盤・パイプライン・データモデルの設計を担当。
+                            </p>
+                            <p class="work-tags mono">Snowflake / dbt / DWH / Data Pipeline</p>
+                        </div>
+                    </li>
+                    <li class="work reveal">
+                        <span class="work-num mono">03</span>
+                        <div class="work-main">
+                            <h3 class="work-title">Microsoft AI活用セミナー講師</h3>
+                            <p class="work-desc">
+                                Copilot Studioを用いたAIエージェントの設計・構築をテーマに、
+                                座学とハンズオンの両パートで講師を担当。
+                            </p>
+                            <p class="work-tags mono">Copilot Studio / MCP / Power Automate / Hands-on</p>
+                        </div>
+                    </li>
+                    <li class="work reveal">
+                        <span class="work-num mono">04</span>
+                        <div class="work-main">
+                            <h3 class="work-title">官公庁向けOSS LLM開発</h3>
+                            <p class="work-desc">
+                                Llama2 / ELYZAをベースとしたLoRA-SFTによる文書レビュー自動化。
+                                レビュー工数を53%削減し、年間約30人日の工数削減に寄与。
+                            </p>
+                            <p class="work-tags mono">Python / LLM / LoRA / GCP</p>
+                            <p class="work-metric"><span class="work-metric-num">53%</span>レビュー工数削減</p>
+                        </div>
+                    </li>
+                    <li class="work reveal">
+                        <span class="work-num mono">05</span>
+                        <div class="work-main">
+                            <h3 class="work-title">類似提案分析システム</h3>
+                            <p class="work-desc">
+                                BERTによる提案文書の類似度分析。5,000件の提案から3割弱の類似提案を特定し、
+                                人による評価でも約9割の認識合意を獲得。
+                            </p>
+                            <p class="work-tags mono">BERT / NLP / PyTorch / Pandas</p>
+                            <p class="work-metric"><span class="work-metric-num">約9割</span>評価者との認識合意</p>
+                        </div>
+                    </li>
+                    <li class="work reveal">
+                        <span class="work-num mono">06</span>
+                        <div class="work-main">
+                            <h3 class="work-title">Kaggleコンペティション</h3>
+                            <p class="work-desc">
+                                時系列・画像処理コンペでメダルを獲得しKaggle Expertを達成。
+                                現在は海外参加者を含むチームで、主に自然言語処理コンペに参加。
+                            </p>
+                            <p class="work-tags mono">機械学習 / 深層学習 / 時系列分析 / NLP</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- インタールード（写真: StockSnap.io / CC0・帰属表示不要） -->
+        <section class="interlude">
+            <img src="assets/images/city-grid-night.jpg"
+                 alt="夜の都市を上空から見下ろした、琥珀色の光の網"
+                 width="960" height="640" loading="lazy">
+            <div class="interlude-inner">
+                <p class="interlude-copy">
+                    データを、<br>
+                    街の灯りのように<br>
+                    つなげていく。
+                </p>
+                <p class="interlude-note mono">DATA SCIENCE FOR VALUE</p>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section section-contact">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="section-num mono">05</span>
+                    <h2 class="section-title">Contact<span class="section-title-ja">ご相談・ご連絡</span></h2>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-copy reveal">
+                        <p class="contact-lead">
+                            データ基盤の構築、AI活用のご相談、<br>
+                            登壇・執筆のご依頼など、<br>
+                            お気軽にご連絡ください。
+                        </p>
+                        <p class="contact-note mono">通常 2–3 営業日以内にご返信します。</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="portfolio" class="portfolio section">
-            <div class="container">
-                <h2 class="section-title">Portfolio</h2>
-                <div class="portfolio-grid">
-                    <article class="portfolio-item">
-                        <div class="portfolio-content">
-                            <h3>Cortex Agentを用いたサポート業務AX化</h3>
-                            <p>Snowflake Cortex Agentを活用し、製品仕様書、FAQ、過去問い合わせ履歴を参照した問い合わせ回答支援を検証。一次回答案生成と運用課題整理を推進。</p>
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Snowflake</span>
-                                <span class="tech-tag">Cortex Agent</span>
-                                <span class="tech-tag">Cortex Search</span>
-                                <span class="tech-tag">AI Agent</span>
-                            </div>
+                    <form id="contact-form" class="contact-form reveal" action="https://formspree.io/f/xnnzjdyv" method="POST">
+                        <div class="field">
+                            <label for="name" class="mono">01 — お名前</label>
+                            <input type="text" id="name" name="name" placeholder="山田 太郎" required>
                         </div>
-                    </article>
-                    <article class="portfolio-item">
-                        <div class="portfolio-content">
-                            <h3>Snowflake全社共通DWH導入</h3>
-                            <p>基幹システム、Salesforce、Microsoft 365などのデータをSnowflakeへ統合するデータ基盤・パイプライン・データモデル設計を担当。</p>
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Snowflake</span>
-                                <span class="tech-tag">dbt</span>
-                                <span class="tech-tag">DWH</span>
-                                <span class="tech-tag">Data Pipeline</span>
-                            </div>
+                        <div class="field">
+                            <label for="email" class="mono">02 — メールアドレス</label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
                         </div>
-                    </article>
-                    <article class="portfolio-item">
-                        <div class="portfolio-content">
-                            <h3>Microsoft AI活用セミナー</h3>
-                            <p>Copilot Studioを用いたAIエージェント設計・構築をテーマに、座学とハンズオンの両パートで講師を担当。</p>
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Copilot Studio</span>
-                                <span class="tech-tag">MCP</span>
-                                <span class="tech-tag">Power Automate</span>
-                                <span class="tech-tag">Hands-on</span>
-                            </div>
+                        <div class="field">
+                            <label for="message" class="mono">03 — メッセージ</label>
+                            <textarea id="message" name="message" rows="5" placeholder="ご相談内容をご記入ください" required></textarea>
                         </div>
-                    </article>
-                    <article class="portfolio-item">
-                        <div class="portfolio-content">
-                            <h3>官公庁向けOSS LLM開発</h3>
-                            <p>Llama2/ELYZA等をベースとしたLoRA-SFTによる文書レビュー自動化。レビュー工数を53%削減し、年間30人日程度の工数削減に寄与。</p>
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">LLM</span>
-                                <span class="tech-tag">LoRA</span>
-                                <span class="tech-tag">GCP</span>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="portfolio-item">
-                        <div class="portfolio-content">
-                            <h3>類似提案分析システム</h3>
-                            <p>BERTを活用した提案文書の類似度分析。5,000件の提案から3割弱の類似提案を特定。人による評価でも約9割の認識合意を獲得。</p>
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">BERT</span>
-                                <span class="tech-tag">NLP</span>
-                                <span class="tech-tag">PyTorch</span>
-                                <span class="tech-tag">Pandas</span>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="portfolio-item">
-                        <div class="portfolio-content">
-                            <h3>Kaggleコンペティション実績</h3>
-                            <p>時系列コンペ・画像処理コンペでメダルを獲得し、Kaggle Expertを達成。現在は海外参加者を含むチームで、主に自然言語処理コンペに取り組む。</p>
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">機械学習</span>
-                                <span class="tech-tag">深層学習</span>
-                                <span class="tech-tag">時系列分析</span>
-                                <span class="tech-tag">NLP</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact section">
-            <div class="container">
-                <h2 class="section-title">Contact</h2>
-                <div class="contact-content">
-                    <p class="contact-intro">
-                        お仕事のご依頼やご質問はお気軽にご連絡ください。
-                    </p>
-                    <form id="contact-form" class="contact-form" action="https://formspree.io/f/xnnzjdyv" method="POST">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="お名前" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="メールアドレス" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="メッセージ" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-large">送信する</button>
+                        <button type="submit" class="btn btn-fill btn-submit">送信する<span class="btn-arrow">→</span></button>
                     </form>
                 </div>
             </div>
@@ -292,13 +367,14 @@
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Satoru Tsugawa. All rights reserved.</p>
+        <div class="container footer-inner">
+            <span class="footer-name">津川 聡<span class="mono"> / Satoru Tsugawa</span></span>
+            <span class="mono footer-copy">&copy; 2026 Satoru Tsugawa. All rights reserved.</span>
         </div>
     </footer>
 
     <script src="script.js"></script>
-    
+
     <!-- チャットボット -->
     <link rel="stylesheet" href="chatbot/chatbot.css">
     <script src="chatbot/chatbot.js"></script>
